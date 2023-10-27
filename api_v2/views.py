@@ -3,9 +3,12 @@ from django_filters import BooleanFilter
 from django_filters.rest_framework import DjangoFilterBackend
 import django_filters
 from rest_framework import viewsets
+from rest_framework import views
+from rest_framework.response import Response
 
 from api_v2 import models
 from api_v2 import serializers
+from api_v2 import enums
 from api.schema_generator import CustomSchema
 
 
@@ -259,5 +262,9 @@ class RaceViewSet(viewsets.ReadOnlyModelViewSet):
     filterset_class = RaceFilterSet
 
 
-
-
+class EnumView(views.APIView):
+    def get(self, request, format=None):
+        """
+        Return a list of all enums.
+        """
+        return Response(enums.SIZE_CHOICES)

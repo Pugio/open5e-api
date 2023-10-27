@@ -4,6 +4,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.template.defaultfilters import slugify
 
+from api_v2 import enums
 
 class HasName(models.Model):
 
@@ -48,14 +49,8 @@ class Object(HasName):
     Basically it describes any sort of matter in the 5e world.
     """
 
-    # Enumerating sizes, so they are sortable.
-    SIZE_CHOICES = [
-        (1, "Tiny"),
-        (2, "Small"),
-        (3, "Medium"),
-        (4, "Large"),
-        (5, "Huge"),
-        (6, "Gargantuan")]
+    # Enumerating sizes
+    SIZE_CHOICES = enums.SIZE_CHOICES
 
     # Setting a reasonable maximum for AC.
     ARMOR_CLASS_MAXIMUM = 100

@@ -76,7 +76,8 @@ urlpatterns = [
     # Versioned API routes (above routes default to v1)
     re_path(r'^v1/', include(router.urls)),
     re_path(r'^v1/search/', include('haystack.urls')),
-    re_path(r'^v2/', include(router_v2.urls))
+    re_path(r'^v2/', include(router_v2.urls)),
+    re_path(r'^v2/enums/',views_v2.EnumView.as_view())
 ]
 
 if settings.DEBUG is True:
