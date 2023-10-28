@@ -198,7 +198,8 @@ class CreatureAttack(HasName, FromDocument):
 class CreatureSet(HasName, HasDescription, FromDocument):
     """A set of Creatures to be referenced."""
 
-    CREATURE_SET_TYPE_CHOICES = [('MONSTER_TYPE', "Monster Type")]
+    CREATURE_SET_TYPE_CHOICES = [('TYPE', "Type"),
+                                 ('TAG', "Tag")]
 
     type = models.TextField(choices=CREATURE_SET_TYPE_CHOICES)
 

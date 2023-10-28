@@ -238,6 +238,15 @@ def make_action_obj(action):
 
     return obj
 
+
+class CreatureSetSerializer(serializers.ModelSerializer):
+    key = serializers.ReadOnlyField()
+
+    class Meta:
+        model = models.CreatureSet
+        fields = '__all__'
+
+
 class CreatureSerializer(GameContentSerializer):
 
     key = serializers.ReadOnlyField()
@@ -248,6 +257,7 @@ class CreatureSerializer(GameContentSerializer):
     skill_bonuses = serializers.SerializerMethodField()
     all_skill_bonuses = serializers.SerializerMethodField()
     actions = serializers.SerializerMethodField()
+    creaturesets = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Creature
@@ -257,9 +267,8 @@ class CreatureSerializer(GameContentSerializer):
             'key',
             'name',
             'category',
-            'size',
-            'type',
             'creaturesets',
+            'size',
             'subtype',
             'alignment',
             'weight',
@@ -368,10 +377,5 @@ class CreatureSerializer(GameContentSerializer):
             result.append(action_obj)
         return result
 
-
-class CreatureSetSerializer(GameContentSerializer):
-    key = serializers.ReadOnlyField()
-
-    class Meta:
-        model = models.CreatureSet
-        fields = '__all__'
+    def get_creaturesets(self, creature):
+        return creature.creaturesets.all().values("key","type")
