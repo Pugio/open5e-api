@@ -193,3 +193,14 @@ class CreatureAttack(HasName, FromDocument):
     extra_damage_die_type = damage_die_type_field()
     extra_damage_bonus = damage_bonus_field()
     extra_damage_type = damage_type_field()
+
+
+class CreatureSet(HasName, HasDescription, FromDocument):
+    """A set of Creatures to be referenced."""
+
+    CREATURE_SET_TYPE_CHOICES = [('MONSTER_TYPE', "Monster Type")]
+
+    type = models.TextField(choices=CREATURE_SET_TYPE_CHOICES)
+
+    creatures = models.ManyToManyField(Creature, related_name="creaturesets",
+                                       help_text="The set of creatures.")
