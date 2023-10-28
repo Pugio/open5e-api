@@ -239,6 +239,17 @@ class CreatureViewSet(viewsets.ReadOnlyModelViewSet):
     filterset_class = CreatureFilterSet
 
 
+class CreatureSetViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    list: API endpoint for returning a list of creatures.
+    retrieve: API endpoint for returning a particular creature.
+    """
+    queryset = models.CreatureSet.objects.all().order_by('pk')
+    serializer_class = serializers.CreatureSetSerializer
+    #filterset_class = CreatureFilterSet
+
+
+
 class RaceFilterSet(FilterSet):
     class Meta:
         model = models.Race

@@ -259,6 +259,7 @@ class CreatureSerializer(GameContentSerializer):
             'category',
             'size',
             'type',
+            'creaturesets',
             'subtype',
             'alignment',
             'weight',
@@ -366,3 +367,11 @@ class CreatureSerializer(GameContentSerializer):
             action_obj = make_action_obj(action)
             result.append(action_obj)
         return result
+
+
+class CreatureSetSerializer(GameContentSerializer):
+    key = serializers.ReadOnlyField()
+
+    class Meta:
+        model = models.CreatureSet
+        fields = '__all__'
