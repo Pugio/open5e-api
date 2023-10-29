@@ -36,16 +36,10 @@ class Creature(Object, Abilities, FromDocument):
         help_text='What category this creature belongs to.'
     )
 
-    type = models.CharField(
-        max_length=20,
-        choices=MONSTER_TYPES,
-        help_text='Which type of creature this is.'
-    )
-
-    subtype = models.CharField(
-        null=True,
-        max_length=100,
-        help_text='Which subtype or subtypes this creature has, if any.'
+    type = models.ForeignKey(
+        "CreatureType",
+        on_delete=models.CASCADE,
+        help_text='Type of creature.'
     )
 
     alignment = models.CharField(
@@ -141,6 +135,7 @@ def damage_type_field():
         help_text='What kind of damage this attack deals.'
     )
 
+
 class CreatureAttack(HasName, FromDocument):
 
     creature_action = models.ForeignKey(
@@ -195,13 +190,16 @@ class CreatureAttack(HasName, FromDocument):
     extra_damage_type = damage_type_field()
 
 
+class CreatureType(HasName, HasDescription):
+    """Type of creature, such as Aberration."""
+
+
 class CreatureSet(HasName, HasDescription, FromDocument):
     """A set of Creatures to be referenced."""
 
-    CREATURE_SET_TYPE_CHOICES = [('TYPE', "Type"),
-                                 ('TAG', "Tag")]
+    CREATURE_SET_TYPE_CHOICES = [('TAG', "Tag")]
 
-    type = models.TextField(choices=CREATURE_SET_TYPE_CHOICES)
+    set_type = models.TextField(choices=CREATURE_SET_TYPE_CHOICES)
 
     creatures = models.ManyToManyField(Creature, related_name="creaturesets",
                                        help_text="The set of creatures.")

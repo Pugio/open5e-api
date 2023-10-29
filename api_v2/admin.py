@@ -46,6 +46,7 @@ admin.site.register(Feat, admin_class=FeatAdmin)
 admin.site.register(Creature)
 admin.site.register(CreatureAction)
 admin.site.register(CreatureAttack)
+admin.site.register(CreatureType)
 admin.site.register(CreatureSet)
 
 
