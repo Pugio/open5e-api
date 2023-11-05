@@ -197,5 +197,17 @@ class CreatureAttack(HasName, FromDocument):
 class CreatureSet(HasName, FromDocument):
     """Set that the creature belongs to."""
 
+    CREATURESET_TYPES = [
+        ("environment", "Environment"),
+        ("tag", "Tag")]
+        
+    type = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True,
+        choices=CREATURESET_TYPES,
+        help_text='CreatureSet type.')
+
+
     creatures = models.ManyToManyField(Creature, related_name="creaturesets",
                                        help_text="The set of creatures.")
