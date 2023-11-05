@@ -1,0 +1,23 @@
+[
+{
+  "model": "api_v2.creatureset",
+  "pk": "devil",
+  "fields": {
+    "name": "Devil",
+    "document": "srd",
+    "type": "tag",
+    "creatures": [
+      "barbed-devil",
+      "bearded-devil",
+      "bone-devil",
+      "chain-devil",
+      "erinyes",
+      "horned-devil",
+      "ice-devil",
+      "imp",
+      "lemure",
+      "pit-fiend"
+    ]
+  }
+}
+]
